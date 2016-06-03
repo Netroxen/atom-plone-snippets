@@ -1,4 +1,4 @@
-# atom-plone-snippets package
+# atom-plone-snippets
 
 A Plone autocomplete package consisting of various snippets and templates for the Atom editor.
 
