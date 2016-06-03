@@ -1,0 +1,16 @@
+'.text.html, .text.xml, .text.css, .source.js':
+  'editor':
+    'completions': [
+
+      # Snippets
+      'egg'
+      'pti'
+      'rs'
+      'rsrg'
+      'rscss'
+      'schema'
+      'i18n-buildout'
+      'tal-override'
+
+      # Classes
+    ]

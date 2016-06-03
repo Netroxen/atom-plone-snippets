@@ -1,0 +1,25 @@
+{
+  "name": "atom-plone-snippets",
+  "main": "./lib/atom-plone-snippets",
+  "version": "0.1.0",
+  "description": "Plone snippets with autocompletion.",
+  "keywords": [],
+  "activationCommands": {
+    "plone": "toggle"
+  },
+  "repository": "https://github.com/atom/atom-plone-snippets",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".json": [
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
+}
