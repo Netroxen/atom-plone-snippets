@@ -7,7 +7,7 @@
   "activationCommands": {
     "plone": "toggle"
   },
-  "repository": "https://github.com/atom/atom-plone-snippets",
+  "repository": "https://github.com/netroxen/atom-plone-snippets",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
