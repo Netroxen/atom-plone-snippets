@@ -133,7 +133,7 @@
               <browser:page
                   name="batchnavigation"
                   for="*"
-                  layer="${1:your.package}.interfaces.IDogrockerWebsiteLayer"
+                  layer="${1:your.package}.interfaces.IYourPackageLayer"
                   class="plone.batching.browser.PloneBootstrapBatchView"
                   template=".../batchnavigation_bootstrap.pt"
                   permission="zope.Public"
