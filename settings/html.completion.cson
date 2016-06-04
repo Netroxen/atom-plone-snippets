@@ -3,14 +3,39 @@
     'completions': [
 
       # Plone
-      'egg'
-      'pti'
+      'portal-type-item'
+      'portal-schema-template'
+
+      'browser-page-zcml'
+      'browser-page-template'
+
+      'bootstrap-batching-zcml'
+      'bootstrap-batching-template'
+
+      'mail-template'
+
       'rs'
       'rsrg'
       'rscss'
-      'schema'
+
+      'egg-buildout'
       'i18n-buildout'
+      'grunt-buildout'
+
+      # TAL
       'tal-override'
+      'tal-min'
+      'tal-condition'
+      'tal-content'
+      'tal-replace'
+      'tal-attributes'
+      'tal-define'
+      'tal-repeat'
+      'tal-define-macro'
+      'tal-use-macro'
+      'tal-fill-slot'
+      'tal-i18n-translate'
+      'tal-i18n-attributes'
 
       # Diazo
       'daz-template'
@@ -27,5 +52,10 @@
       'daz-rule'
       'daz-xsl-attribute'
 
-      # Classes
+      # Python
+      'schema-py'
+      'schema-interfaces'
+      'browser-view'
+
+      # Misc
     ]

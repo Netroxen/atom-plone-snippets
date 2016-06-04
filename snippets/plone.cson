@@ -1,7 +1,7 @@
-'.text.html, .text.xml':
+'.text.html, .text.xml, .text.zcml, .text.pt':
 
   'Portal Type Item':
-    'prefix': 'pti'
+    'prefix': 'portal-type-item'
     'body': """
               <!-- Comment -->
               <?xml version="1.0"?>
@@ -11,7 +11,7 @@
             """
 
   'Egg Buildout':
-    'prefix': 'egg'
+    'prefix': 'egg-buildout'
     'body': """
               [buildout]
               eggs-directory = /home/$1/.buildout/eggs
@@ -44,6 +44,163 @@
 
               [versions]
               i18ndude = 3.4.0
+            """
+
+  'Grunt Buildout':
+    'prefix': 'grunt-buildout'
+    'body': """
+            [buildout]
+            parts =
+              zopepy
+
+            [instance]
+            eggs =
+              Products.CMFPlone
+
+            [zopepy]
+            recipe = zc.recipe.egg
+            eggs =
+              ${instance:eggs}
+              ${test:eggs}
+            interpreter = zopepy
+            scripts =
+              zopepy
+              plone-generate-gruntfile
+              plone-compile-resources
+            """
+
+  'Configure Browser Page':
+    'prefix': 'browser-page-zcml'
+    'body': """
+              <browser:page
+                  name="helloworld" # Page name
+                  for="*" # Page accessibility
+                  permission="zope2.View"
+                  class=".helloworld.HelloWorldView" # Class definition reference
+                  />
+            """
+
+  'Browser Page Template':
+    'prefix': 'browser-page-template'
+    'body': """
+              <html xmlns:metal="http://xml.zope.org/namespaces/metal"
+                    metal:use-macro="here/main_template/macros/master"
+                    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+                    xmlns:tal="http://xml.zope.org/namespaces/tal"
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    i18n:domain="my.addon"
+                    lang="en">
+
+              <body>
+                $1
+              </body>
+
+              </html>
+            """
+
+  'Mail Template':
+    'prefix': 'mail-template'
+    'body': """
+              <div xmlns="http://www.w3.org/1999/xhtml"
+                   xml:lang="en"
+                   xmlns:tal="http://xml.zope.org/namespaces/tal"
+                   xmlns:metal="http://xml.zope.org/namespaces/metal"
+                   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+                   i18n:domain="plone"
+                   tal:omit-tag=""
+                   tal:define="portal context/@@plone_portal_state/portal;
+                               charset portal/email_charset|string:utf-8;
+                               dummy python:request.RESPONSE.setHeader('Content-Type', 'text/plain;;charset=%s' % charset)
+                               ">
+              <span i18n:translate="" tal:omit-tag="">Hello</span> <span tal:replace="options/name|nothing"/>,
+
+              <span i18n:translate="" tal:omit-tag="">Thank you for your message</span>.
+
+              [<span i18n:translate="" tal:omit-tag="">Sent as</span>]
+              <span i18n:translate="" tal:omit-tag="">Name</span>: <span tal:replace="options/name|nothing"/>
+              <span i18n:translate="" tal:omit-tag="">Contact</span>: <span tal:replace="options/phone|nothing"/>
+              <span i18n:translate="" tal:omit-tag="">E-Mail</span>: <span tal:replace="options/email|nothing"/>
+              <span i18n:translate="" tal:omit-tag="">Address</span>: <span tal:replace="options/address|nothing"/>
+
+              [<span i18n:translate="" tal:omit-tag="">Message</span>]
+              <span tal:replace="options/message|nothing"/>
+              </div>
+            """
+
+  'Bootstrap Batching':
+    'prefix': 'bootstrap-batching-zcml'
+    'body': """
+              <browser:page
+                  name="batchnavigation"
+                  for="*"
+                  layer="${1:your.package}.interfaces.IDogrockerWebsiteLayer"
+                  class="plone.batching.browser.PloneBootstrapBatchView"
+                  template=".../batchnavigation_bootstrap.pt"
+                  permission="zope.Public"
+                  />
+            """
+
+  'Bootstrap Batching Template':
+    'prefix': 'bootstrap-batching-template'
+    'body': """
+              <!-- Pagination Twitter Bootstrap style
+                   http://twitter.github.com/bootstrap/components.html#pagination
+                   -->
+
+              <div i18n:domain="plone" metal:define-macro="navigation" tal:define="batch view/batch|nothing;" tal:condition="batch">
+
+                <ul class="pagination pagination-sm" tal:condition="batch/multiple_pages">
+
+                  <!-- First -->
+                  <li class="previous" tal:condition="batch/show_link_to_first">
+                    <a href="" tal:attributes="href python:view.make_link(1)">
+                      <span tal:condition="view/minimal_navigation" tal:omit-tag="">&laquo;</span>
+                      <span tal:condition="not:view/minimal_navigation" tal:omit-tag="" i18n:translate="batch_first_item">First</span>
+                    </a>
+                  </li>
+
+                  <!-- Previous -->
+                  <li class="previous" tal:condition="batch/has_previous">
+                    <a href="" tal:attributes="href python:view.make_link(batch.previouspage)">
+                      <span tal:condition="view/minimal_navigation" tal:omit-tag="">&laquo;</span>
+                      <span tal:condition="not:view/minimal_navigation" tal:omit-tag="">&lsaquo;</span>
+                    </a>
+                  </li>
+
+                  <!-- Pagelist quick previous navigation -->
+                  <li tal:repeat="pagenumber batch/previous_pages">
+                    <a href="" tal:content="pagenumber" tal:attributes="href python:view.make_link(pagenumber)"/>
+                  </li>
+
+                  <!-- Active page -->
+                  <li class="active" tal:condition="batch/navlist">
+                    <a href="" tal:content="batch/pagenumber">Current page number</a>
+                  </li>
+
+                  <!-- Pagelist quick next navigation -->
+                  <li tal:repeat="pagenumber batch/next_pages">
+                    <a href="" tal:content="pagenumber" tal:attributes="href python:view.make_link(pagenumber)"/>
+                  </li>
+
+                  <!-- Next -->
+                  <li class="next" tal:condition="batch/has_next">
+                    <a href="" tal:attributes="href python:view.make_link(batch.nextpage)">
+                      <span tal:condition="view/minimal_navigation" tal:omit-tag="">&raquo;</span>
+                      <span tal:condition="not:view/minimal_navigation" tal:omit-tag="">&rsaquo;</span>
+                    </a>
+                  </li>
+
+                  <!-- Last -->
+                  <li class="next" tal:condition="batch/show_link_to_last">
+                    <a href="" tal:attributes="href python:view.make_link(batch.lastpage)">
+                      <span tal:condition="view/minimal_navigation" tal:omit-tag="">&raquo;</span>
+                      <span tal:condition="not:view/minimal_navigation" tal:omit-tag="" i18n:translate="batch_last_item">Last</span>
+                    </a>
+                  </li>
+
+                </ul>
+
+              </div>
             """
 
   'Resource Registry CSS':
@@ -107,7 +264,7 @@
             """
 
   'Schema XML Template':
-    'prefix': 'schema'
+    'prefix': 'portal-schema-template'
     'body': """
               <?xml version="1.0"?>
               <object name="Name" meta_type="Dexterity FTI" i18n:domain="${1:your.package}"

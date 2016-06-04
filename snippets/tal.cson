@@ -1,6 +1,6 @@
 '.text.html, .text.xml':
 
-  'TAL Override Template':
+  'TAL Template Override':
     'prefix': 'tal-override'
     'body': """
             <html xmlns="http://www.w3.org/1999/xhtml"
@@ -22,3 +22,66 @@
             </body>
             </html>
             """
+
+  'TAL Template Min':
+    'prefix': 'tal-min'
+    'body': """
+            <html xmlns="http://www.w3.org/1999/xhtml"
+                  xml:lang="en"
+                  xmlns:tal="http://xml.zope.org/namespaces/tal"
+                  xmlns:metal="http://xml.zope.org/namespaces/metal"
+                  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+                  lang="en"
+                  metal:use-macro="context/main_template/macros/master"
+                  i18n:domain="plone">
+            <body>
+
+              $1
+
+            </body>
+            </html>
+            """
+
+  'TAL Condition':
+    'prefix': 'tal-condition'
+    'body': 'tal:condition="${1:nothing}"'
+
+  'TAL Content':
+    'prefix': 'tal-content'
+    'body': 'tal:content="$1"'
+
+  'TAL Replace':
+    'prefix': 'tal-replace'
+    'body': 'tal:replace="${1:nothing}"'
+
+  'TAL Attributes':
+    'prefix': 'tal-attributes'
+    'body': 'tal:attributes="$1"'
+
+  'TAL Define':
+    'prefix': 'tal-define'
+    'body': 'tal:define="$1"'
+
+  'TAL Repeat':
+    'prefix': 'tal-repeat'
+    'body': 'tal:repeat="$1"'
+
+  'TAL Define Macro':
+    'prefix': 'tal-define-macro'
+    'body': 'define-macro="$1"'
+
+  'TAL Use Macro':
+    'prefix': 'tal-use-macro'
+    'body': 'use-macro="$1"'
+
+  'TAL Fill Slot':
+    'prefix': 'tal-fill-slot'
+    'body': 'fill-slot="$1"'
+
+  'TAL i18n Translate':
+    'prefix': 'tal-i18n-translate'
+    'body': 'i18n:translate="$1"'
+
+  'TAL i18n Attributes':
+    'prefix': 'tal-i18n-attributes'
+    'body': 'i18n:attributes="$1"'
