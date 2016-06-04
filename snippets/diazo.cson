@@ -1,5 +1,99 @@
-'.text.xml, .text.html':
+'.text.html, .text.xml':
 
-  '':
-    'prefix': ''
-    'body': ''
+  'Diazo Template':
+    'prefix': 'daz-template'
+    'body': """
+              <?xml version="1.0" encoding="UTF-8"?>
+              <rules xmlns="http://namespaces.plone.org/diazo"
+                     xmlns:css="http://namespaces.plone.org/diazo/css"
+                     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                     xmlns:xi="http://www.w3.org/2001/XInclude">
+
+                <rules css:if-content="$1">
+                    <theme href="" />
+
+                </rules>
+
+              </rules>
+            """
+
+  'Diazo Before':
+    'prefix': 'daz-before'
+    'body': """
+              <!-- Comment -->
+              <before css:theme="$1"
+                      css:content="" />
+            """
+
+  'Diazo After':
+    'prefix': 'daz-after'
+    'body': """
+              <!-- Comment -->
+              <after css:theme="$1"
+                     css:content="" />
+            """
+
+  'Diazo Replace':
+    'prefix': 'daz-replace'
+    'body': """
+              <!-- Comment -->
+              <replace css:theme-children="$1"
+                       css:content-children="" />
+            """
+
+  'Diazo Copy':
+    'prefix': 'daz-copy'
+    'body': """
+              <!-- Comment -->
+              <copy css:content="$1"
+                    css:theme=""
+                    attributes="" />
+            """
+
+  'Diazo Merge':
+    'prefix': 'daz-merge'
+    'body': """
+              <!-- Comment -->
+              <merge css:content="$1"
+                     css:theme=""
+                     attributes="" />
+            """
+
+  'Diazo Drop':
+    'prefix': 'daz-drop'
+    'body': '<drop css:theme="$1" />'
+
+  'Diazo Strip':
+    'prefix': 'daz-strip'
+    'body': '<strip css:theme="$1" />'
+
+  'Diazo Theme':
+    'prefix': 'daz-theme'
+    'body': '<theme href="${1:theme}.html" />'
+
+  'Diazo NoTheme':
+    'prefix': 'daz-notheme'
+    'body': '<notheme css:if-content="$1" />'
+
+  'Diazo XInclude':
+    'prefix': 'daz-xinclude'
+    'body': '<xi:include href="${1:standard-rules}.xml" />'
+
+  'Diazo Ruleset':
+    'prefix': 'daz-rule'
+    'body': """
+              <!-- Comment -->
+              <rules css:if-content="$1">
+                $1
+              </rules>
+            """
+
+  'Diazo XSL Attribute':
+    'prefix': 'daz-xsl-attribute'
+    'body': """
+              <!-- This example replaces the img in #content with the src extension /@@/images/image/thumb  -->
+              <replace css:theme="#target" css:content="#content" />
+              <xsl:template match="img/@src[not(contains(., '@@'))]">
+                  <xsl:attribute name="src"><xsl:value-of select="." />/@@/images/image/thumb</xsl:attribute>
+              </xsl:template>
+            """

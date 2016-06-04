@@ -1,0 +1,31 @@
+'.text.html, .text.xml, .text.css, .source.js':
+  'editor':
+    'completions': [
+
+      # Plone
+      'egg'
+      'pti'
+      'rs'
+      'rsrg'
+      'rscss'
+      'schema'
+      'i18n-buildout'
+      'tal-override'
+
+      # Diazo
+      'daz-template'
+      'daz-before'
+      'daz-after'
+      'daz-replace'
+      'daz-copy'
+      'daz-merge'
+      'daz-drop'
+      'daz-strip'
+      'daz-theme'
+      'daz-notheme'
+      'daz-xinclude'
+      'daz-rule'
+      'daz-xsl-attribute'
+
+      # Classes
+    ]
