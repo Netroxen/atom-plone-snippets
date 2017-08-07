@@ -20,7 +20,8 @@
            </metal:content-core>
 
            </body>
-           </html>"""
+           </html>
+           """
 
   'TAL Template Min':
     'prefix':'tal-min'
@@ -38,7 +39,8 @@
              $2
 
            </body>
-           </html>"""
+           </html>
+           """
 
   'TAL Condition':
     'prefix':'tal-condition'

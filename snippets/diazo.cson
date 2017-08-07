@@ -14,28 +14,32 @@
 
              </rules>
 
-           </rules>"""
+           </rules>
+           """
 
   'Diazo Before':
     'prefix':'daz-before'
     'body':"""
            <!-- Comment -->
            <before css:theme="$1"
-                   css:content="$2" />"""
+                   css:content="$2" />
+           """
 
   'Diazo After':
     'prefix':'daz-after'
     'body':"""
            <!-- Comment -->
            <after css:theme="$1"
-                  css:content="$2" />"""
+                  css:content="$2" />
+           """
 
   'Diazo Replace':
     'prefix':'daz-replace'
     'body':"""
            <!-- Comment -->
            <replace css:theme-children="$1"
-                    css:content-children="$2" />"""
+                    css:content-children="$2" />
+           """
 
   'Diazo Copy':
     'prefix':'daz-copy'
@@ -43,7 +47,8 @@
            <!-- Comment -->
            <copy css:content="$1"
                  css:theme="$2"
-                 attributes="$3" />"""
+                 attributes="$3" />
+           """
 
   'Diazo Merge':
     'prefix':'daz-merge'
@@ -51,7 +56,8 @@
            <!-- Comment -->
            <merge css:content="$1"
                   css:theme="$2"
-                  attributes="$3" />"""
+                  attributes="$3" />
+           """
 
   'Diazo Drop':
     'prefix':'daz-drop'
@@ -79,7 +85,8 @@
            <!-- Comment -->
            <rules css:if-content="$1">
              $2
-           </rules>"""
+           </rules>
+           """
 
   'Diazo XSL Attribute':
     'prefix':'daz-xsl-attribute'
@@ -88,7 +95,8 @@
            <replace css:theme="#target" css:content="#content" />
            <xsl:template match="img/@src[not(contains(., '@@'))]">
                <xsl:attribute name="src"><xsl:value-of select="." />/@@/images/image/thumb</xsl:attribute>
-           </xsl:template>"""
+           </xsl:template>
+           """
 
   'Manifest':
 		'prefix':'daz-manifest'
@@ -111,4 +119,5 @@
 	         production-js =
 
 	         [theme:overrides]
-	         directory = template-overrides"""
+	         directory = template-overrides
+           """

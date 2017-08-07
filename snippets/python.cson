@@ -3,7 +3,8 @@
   'Coding Magic':
     'prefix':'coding-magic'
     'body':"""
-           # -*- coding: utf-8 -*-"""
+           # -*- coding: utf-8 -*-
+           """
 
   'Schema Python Template':
     'prefix':'schema-py'
@@ -28,7 +29,8 @@
                    title=_(u'$4_description_title',
                            default=u'Description'),
                    required=False,
-               )"""
+               )
+             """
 
   'Schema Interfaces':
     'prefix':'schema-interfaces'
@@ -41,7 +43,9 @@
            from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 
-           class I${2:SomePackage}Layer(IDefaultBrowserLayer):"""
+           class I${2:SomePackage}Layer(IDefaultBrowserLayer):
+               $3
+           """
 
   'Browser View':
     'prefix':'browser-view'
@@ -60,7 +64,8 @@
                    return self.template()
 
                def ${4:...}(self):
-                   return "Hello World!"""
+                   return "Hello World!
+           """
 
   'Return Brains':
     'prefix':'return-brains'
@@ -79,7 +84,8 @@
                        '${6:...}': $7,
                    }
                    items.append(item_dict)
-               return items"""
+               return items
+           """
 
   'Choice Vocabulary':
     'prefix':'simple-vocabulary'
@@ -89,4 +95,5 @@
            #                 from zope.schema.vocabulary import SimpleVocabulary
            ${1:SOME_NAME} = SimpleVocabulary(
                [SimpleTerm(value=u'${2:...}', title=_(u'$3_vocab_$4', default=u'${5:...}')), ]
-           )"""
+           )
+           """

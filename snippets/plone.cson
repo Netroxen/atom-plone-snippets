@@ -7,7 +7,8 @@
            <?xml version="1.0"?>
            <object name="portal_types" meta_type="Plone Types Tool">
              <object name="$1" meta_type="Dexterity FTI"/>
-           </object>"""
+           </object>
+           """
 
   'Egg Buildout':
     'prefix':'egg-buildout'
@@ -15,7 +16,8 @@
            [buildout]
            eggs-directory = /home/$1/.buildout/eggs
            download-cache = /home/$2/.buildout/downloads
-           extends-cache  = /home/$3/.buildout/extends"""
+           extends-cache  = /home/$3/.buildout/extends
+           """
 
   'i18n Buildout':
     'prefix':'i18n-buildout'
@@ -41,7 +43,8 @@
            languages = ${buildout:languages}
 
            [versions]
-           i18ndude = 3.4.0"""
+           i18ndude = 3.4.0
+           """
 
   'Grunt Buildout':
     'prefix':'grunt-buildout'
@@ -63,7 +66,8 @@
            scripts =
              zopepy
              plone-generate-gruntfile
-             plone-compile-resources"""
+             plone-compile-resources
+           """
 
   'Configure Browser Page':
     'prefix':'browser-page-zcml'
@@ -73,7 +77,8 @@
                for="*"
                permission="zope2.View"
                class=".$2.${3:Some}View"
-               />"""
+               />
+           """
 
   'Browser Page Template':
     'prefix':'browser-page-template'
@@ -90,7 +95,8 @@
              $2
            </body>
 
-           </html>"""
+           </html>
+           """
 
   'Mail Template':
     'prefix':'mail-template'
@@ -118,7 +124,8 @@
 
            [<span i18n:translate="" tal:omit-tag="">Message</span>]
            <span tal:replace="options/message|nothing"/>
-           </div>"""
+           </div>
+           """
 
   'Bootstrap Batching':
     'prefix':'bootstrap-batching'
@@ -130,7 +137,8 @@
                class="plone.batching.browser.PloneBootstrapBatchView"
                template="${3:...}/batchnavigation_bootstrap.pt"
                permission="zope.Public"
-               />"""
+               />
+           """
 
   'Bootstrap Batching Template':
     'prefix':'bootstrap-batching-template'
@@ -192,7 +200,8 @@
 
              </ul>
 
-           </div>"""
+           </div>
+           """
 
   'Resource Registry CSS':
     'prefix':'registry-css'
@@ -200,7 +209,8 @@
            <!-- Comment -->
            <value key="css">
               <element>++resource++${1:some.package}/${1:custom}.less</element>
-           </value>"""
+           </value>
+           """
 
   'Resource Registry Item':
     'prefix':'registry-item'
@@ -210,7 +220,8 @@
                   prefix="plone.resources/${1:...}">
              <value key="js">++resource++${2:some.package}/$2.js</value>
              <value key="deps">jquery</value>
-           </records>"""
+           </records>
+           """
 
   'Resource Registry':
     'prefix':'resource-registry'
@@ -249,7 +260,8 @@
                <value key="last_compilation"></value>
              </records>
 
-           </registry>"""
+           </registry>
+           """
 
   'Schema XML Template':
     'prefix':'portal-schema-template'
@@ -296,4 +308,5 @@
                url_expr="string:${object_url}/edit" visible="True">
                <permission value="Modify portal content"/>
              </action>
-           </object>"""
+           </object>
+           """
