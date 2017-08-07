@@ -1,313 +1,299 @@
 '.text.html, .text.xml, .text.zcml, .text.pt':
 
   'Portal Type Item':
-    'prefix': 'portal-type-item'
-    'body': """
-              <!-- Comment -->
-              <?xml version="1.0"?>
-              <object name="portal_types" meta_type="Plone Types Tool">
-                <object name="$1" meta_type="Dexterity FTI"/>
-              </object>
-            """
+    'prefix':'portal-type-item'
+    'body':"""
+           <!-- Comment -->
+           <?xml version="1.0"?>
+           <object name="portal_types" meta_type="Plone Types Tool">
+             <object name="$1" meta_type="Dexterity FTI"/>
+           </object>"""
 
   'Egg Buildout':
-    'prefix': 'egg-buildout'
-    'body': """
-              [buildout]
-              eggs-directory = /home/$1/.buildout/eggs
-              download-cache = /home/.../.buildout/downloads
-              extends-cache  = /home/.../.buildout/extends
-            """
+    'prefix':'egg-buildout'
+    'body':"""
+           [buildout]
+           eggs-directory = /home/$1/.buildout/eggs
+           download-cache = /home/$2/.buildout/downloads
+           extends-cache  = /home/$3/.buildout/extends"""
 
   'i18n Buildout':
-    'prefix': 'i18n-buildout'
-    'body': """
-              parts =
-                i18ndude
-                i18nize-webapp
+    'prefix':'i18n-buildout'
+    'body':"""
+           parts =
+             i18ndude
+             i18nize-webapp
 
-              languages = de
+           languages = ${1:de}
 
-              [i18ndude]
-              recipe = zc.recipe.egg
-              eggs = i18ndude
+           [i18ndude]
+           recipe = zc.recipe.egg
+           eggs = i18ndude
 
-              [i18nize-webapp]
-              recipe = collective.recipe.template
-              input = ${buildout:directory}/templates/i18nize.in
-              output = ${buildout:bin-directory}/i18nize-webapp
-              mode = 775
-              dollar = $
-              domain = ${1:your.package}
-              packagepath = ${buildout:directory}/src/operun/frontpage
-              languages = ${buildout:languages}
+           [i18nize-webapp]
+           recipe = collective.recipe.template
+           input = ${buildout:directory}/templates/i18nize.in
+           output = ${buildout:bin-directory}/i18nize-webapp
+           mode = 775
+           dollar = $
+           domain = ${1:your.package}
+           packagepath = ${buildout:directory}/src/${2:...}
+           languages = ${buildout:languages}
 
-              [versions]
-              i18ndude = 3.4.0
-            """
+           [versions]
+           i18ndude = 3.4.0"""
 
   'Grunt Buildout':
-    'prefix': 'grunt-buildout'
-    'body': """
-            [buildout]
-            parts =
-              zopepy
+    'prefix':'grunt-buildout'
+    'body':"""
+           [buildout]
+           parts =
+             zopepy
 
-            [instance]
-            eggs =
-              Products.CMFPlone
+           [instance]
+           eggs =
+             Products.CMFPlone
 
-            [zopepy]
-            recipe = zc.recipe.egg
-            eggs =
-              ${instance:eggs}
-              ${test:eggs}
-            interpreter = zopepy
-            scripts =
-              zopepy
-              plone-generate-gruntfile
-              plone-compile-resources
-            """
+           [zopepy]
+           recipe = zc.recipe.egg
+           eggs =
+             ${instance:eggs}
+             ${test:eggs}
+           interpreter = zopepy
+           scripts =
+             zopepy
+             plone-generate-gruntfile
+             plone-compile-resources"""
 
   'Configure Browser Page':
-    'prefix': 'browser-page-zcml'
-    'body': """
-              <browser:page
-                  name="helloworld" # Page name
-                  for="*" # Page accessibility
-                  permission="zope2.View"
-                  class=".helloworld.HelloWorldView" # Class definition reference
-                  />
-            """
+    'prefix':'browser-page-zcml'
+    'body':"""
+           <browser:page
+               name="${1:...}"
+               for="*"
+               permission="zope2.View"
+               class=".$2.${3:Some}View"
+               />"""
 
   'Browser Page Template':
-    'prefix': 'browser-page-template'
-    'body': """
-              <html xmlns:metal="http://xml.zope.org/namespaces/metal"
-                    metal:use-macro="here/main_template/macros/master"
-                    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-                    xmlns:tal="http://xml.zope.org/namespaces/tal"
-                    xmlns="http://www.w3.org/1999/xhtml"
-                    i18n:domain="my.addon"
-                    lang="en">
+    'prefix':'browser-page-template'
+    'body':"""
+           <html xmlns:metal="http://xml.zope.org/namespaces/metal"
+                 metal:use-macro="here/main_template/macros/master"
+                 xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+                 xmlns:tal="http://xml.zope.org/namespaces/tal"
+                 xmlns="http://www.w3.org/1999/xhtml"
+                 i18n:domain="${1:some.package}"
+                 lang="en">
 
-              <body>
-                $1
-              </body>
+           <body>
+             $2
+           </body>
 
-              </html>
-            """
+           </html>"""
 
   'Mail Template':
-    'prefix': 'mail-template'
-    'body': """
-              <div xmlns="http://www.w3.org/1999/xhtml"
-                   xml:lang="en"
-                   xmlns:tal="http://xml.zope.org/namespaces/tal"
-                   xmlns:metal="http://xml.zope.org/namespaces/metal"
-                   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-                   i18n:domain="plone"
-                   tal:omit-tag=""
-                   tal:define="portal context/@@plone_portal_state/portal;
-                               charset portal/email_charset|string:utf-8;
-                               dummy python:request.RESPONSE.setHeader('Content-Type', 'text/plain;;charset=%s' % charset)
-                               ">
-              <span i18n:translate="" tal:omit-tag="">Hello</span> <span tal:replace="options/name|nothing"/>,
+    'prefix':'mail-template'
+    'body':"""
+           <div xmlns="http://www.w3.org/1999/xhtml"
+                xml:lang="en"
+                xmlns:tal="http://xml.zope.org/namespaces/tal"
+                xmlns:metal="http://xml.zope.org/namespaces/metal"
+                xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+                i18n:domain="${1:some.package}"
+                tal:omit-tag=""
+                tal:define="portal context/@@plone_portal_state/portal;
+                            charset portal/email_charset|string:utf-8;
+                            dummy python:request.RESPONSE.setHeader('Content-Type', 'text/plain;;charset=%s' % charset)
+                            ">
+           <span i18n:translate="" tal:omit-tag="">Hello</span> <span tal:replace="options/name|nothing"/>,
 
-              <span i18n:translate="" tal:omit-tag="">Thank you for your message</span>.
+           <span i18n:translate="" tal:omit-tag="">Thank you for your message</span>.
 
-              [<span i18n:translate="" tal:omit-tag="">Sent as</span>]
-              <span i18n:translate="" tal:omit-tag="">Name</span>: <span tal:replace="options/name|nothing"/>
-              <span i18n:translate="" tal:omit-tag="">Contact</span>: <span tal:replace="options/phone|nothing"/>
-              <span i18n:translate="" tal:omit-tag="">E-Mail</span>: <span tal:replace="options/email|nothing"/>
-              <span i18n:translate="" tal:omit-tag="">Address</span>: <span tal:replace="options/address|nothing"/>
+           [<span i18n:translate="" tal:omit-tag="">Sent as</span>]
+           <span i18n:translate="" tal:omit-tag="">Name</span>: <span tal:replace="options/name|nothing"/>
+           <span i18n:translate="" tal:omit-tag="">Contact</span>: <span tal:replace="options/phone|nothing"/>
+           <span i18n:translate="" tal:omit-tag="">E-Mail</span>: <span tal:replace="options/email|nothing"/>
+           <span i18n:translate="" tal:omit-tag="">Address</span>: <span tal:replace="options/address|nothing"/>
 
-              [<span i18n:translate="" tal:omit-tag="">Message</span>]
-              <span tal:replace="options/message|nothing"/>
-              </div>
-            """
+           [<span i18n:translate="" tal:omit-tag="">Message</span>]
+           <span tal:replace="options/message|nothing"/>
+           </div>"""
 
   'Bootstrap Batching':
-    'prefix': 'bootstrap-batching-zcml'
-    'body': """
-              <browser:page
-                  name="batchnavigation"
-                  for="*"
-                  layer="${1:your.package}.interfaces.IYourPackageLayer"
-                  class="plone.batching.browser.PloneBootstrapBatchView"
-                  template=".../batchnavigation_bootstrap.pt"
-                  permission="zope.Public"
-                  />
-            """
+    'prefix':'bootstrap-batching'
+    'body':"""
+           <browser:page
+               name="batchnavigation"
+               for="*"
+               layer="${1:some.package}.interfaces.I${2:SomePackage}Layer"
+               class="plone.batching.browser.PloneBootstrapBatchView"
+               template="${3:...}/batchnavigation_bootstrap.pt"
+               permission="zope.Public"
+               />"""
 
   'Bootstrap Batching Template':
-    'prefix': 'bootstrap-batching-template'
-    'body': """
-              <!-- Pagination Twitter Bootstrap style
-                   http://twitter.github.com/bootstrap/components.html#pagination
-                   -->
+    'prefix':'bootstrap-batching-template'
+    'body':"""
+           <!-- Pagination Twitter Bootstrap style
+                http://twitter.github.com/bootstrap/components.html#pagination
+                -->
 
-              <div i18n:domain="plone" metal:define-macro="navigation" tal:define="batch view/batch|nothing;" tal:condition="batch">
+           <div i18n:domain="plone" metal:define-macro="navigation" tal:define="batch view/batch|nothing;" tal:condition="batch">
 
-                <ul class="pagination pagination-sm" tal:condition="batch/multiple_pages">
+             <ul class="pagination pagination-sm" tal:condition="batch/multiple_pages">
 
-                  <!-- First -->
-                  <li class="previous" tal:condition="batch/show_link_to_first">
-                    <a href="" tal:attributes="href python:view.make_link(1)">
-                      <span tal:condition="view/minimal_navigation" tal:omit-tag="">&laquo;</span>
-                      <span tal:condition="not:view/minimal_navigation" tal:omit-tag="" i18n:translate="batch_first_item">First</span>
-                    </a>
-                  </li>
+               <!-- First -->
+               <li class="previous" tal:condition="batch/show_link_to_first">
+                 <a href="" tal:attributes="href python:view.make_link(1)">
+                   <span tal:condition="view/minimal_navigation" tal:omit-tag="">&laquo;</span>
+                   <span tal:condition="not:view/minimal_navigation" tal:omit-tag="" i18n:translate="batch_first_item">First</span>
+                 </a>
+               </li>
 
-                  <!-- Previous -->
-                  <li class="previous" tal:condition="batch/has_previous">
-                    <a href="" tal:attributes="href python:view.make_link(batch.previouspage)">
-                      <span tal:condition="view/minimal_navigation" tal:omit-tag="">&laquo;</span>
-                      <span tal:condition="not:view/minimal_navigation" tal:omit-tag="">&lsaquo;</span>
-                    </a>
-                  </li>
+               <!-- Previous -->
+               <li class="previous" tal:condition="batch/has_previous">
+                 <a href="" tal:attributes="href python:view.make_link(batch.previouspage)">
+                   <span tal:condition="view/minimal_navigation" tal:omit-tag="">&laquo;</span>
+                   <span tal:condition="not:view/minimal_navigation" tal:omit-tag="">&lsaquo;</span>
+                 </a>
+               </li>
 
-                  <!-- Pagelist quick previous navigation -->
-                  <li tal:repeat="pagenumber batch/previous_pages">
-                    <a href="" tal:content="pagenumber" tal:attributes="href python:view.make_link(pagenumber)"/>
-                  </li>
+               <!-- Pagelist quick previous navigation -->
+               <li tal:repeat="pagenumber batch/previous_pages">
+                 <a href="" tal:content="pagenumber" tal:attributes="href python:view.make_link(pagenumber)"/>
+               </li>
 
-                  <!-- Active page -->
-                  <li class="active" tal:condition="batch/navlist">
-                    <a href="" tal:content="batch/pagenumber">Current page number</a>
-                  </li>
+               <!-- Active page -->
+               <li class="active" tal:condition="batch/navlist">
+                 <a href="" tal:content="batch/pagenumber">Current page number</a>
+               </li>
 
-                  <!-- Pagelist quick next navigation -->
-                  <li tal:repeat="pagenumber batch/next_pages">
-                    <a href="" tal:content="pagenumber" tal:attributes="href python:view.make_link(pagenumber)"/>
-                  </li>
+               <!-- Pagelist quick next navigation -->
+               <li tal:repeat="pagenumber batch/next_pages">
+                 <a href="" tal:content="pagenumber" tal:attributes="href python:view.make_link(pagenumber)"/>
+               </li>
 
-                  <!-- Next -->
-                  <li class="next" tal:condition="batch/has_next">
-                    <a href="" tal:attributes="href python:view.make_link(batch.nextpage)">
-                      <span tal:condition="view/minimal_navigation" tal:omit-tag="">&raquo;</span>
-                      <span tal:condition="not:view/minimal_navigation" tal:omit-tag="">&rsaquo;</span>
-                    </a>
-                  </li>
+               <!-- Next -->
+               <li class="next" tal:condition="batch/has_next">
+                 <a href="" tal:attributes="href python:view.make_link(batch.nextpage)">
+                   <span tal:condition="view/minimal_navigation" tal:omit-tag="">&raquo;</span>
+                   <span tal:condition="not:view/minimal_navigation" tal:omit-tag="">&rsaquo;</span>
+                 </a>
+               </li>
 
-                  <!-- Last -->
-                  <li class="next" tal:condition="batch/show_link_to_last">
-                    <a href="" tal:attributes="href python:view.make_link(batch.lastpage)">
-                      <span tal:condition="view/minimal_navigation" tal:omit-tag="">&raquo;</span>
-                      <span tal:condition="not:view/minimal_navigation" tal:omit-tag="" i18n:translate="batch_last_item">Last</span>
-                    </a>
-                  </li>
+               <!-- Last -->
+               <li class="next" tal:condition="batch/show_link_to_last">
+                 <a href="" tal:attributes="href python:view.make_link(batch.lastpage)">
+                   <span tal:condition="view/minimal_navigation" tal:omit-tag="">&raquo;</span>
+                   <span tal:condition="not:view/minimal_navigation" tal:omit-tag="" i18n:translate="batch_last_item">Last</span>
+                 </a>
+               </li>
 
-                </ul>
+             </ul>
 
-              </div>
-            """
+           </div>"""
 
   'Resource Registry CSS':
-    'prefix': 'rscss'
-    'body': """
-              <!-- Comment -->
-              <value key="css">
-                 <element>++resource++your.package/${1:custom}.less</element>
-              </value>
-            """
+    'prefix':'registry-css'
+    'body':"""
+           <!-- Comment -->
+           <value key="css">
+              <element>++resource++${1:some.package}/${1:custom}.less</element>
+           </value>"""
 
   'Resource Registry Item':
-    'prefix': 'rs'
-    'body': """
-              <!-- Comment -->
-              <records interface="Products.CMFPlone.interfaces.IResourceRegistry"
-                     prefix="plone.resources/...">
-                <value key="js">++resource++your.package/$1.js</value>
-                <value key="deps">jquery</value>
-              </records>
-            """
+    'prefix':'registry-item'
+    'body':"""
+           <!-- Comment -->
+           <records interface="Products.CMFPlone.interfaces.IResourceRegistry"
+                  prefix="plone.resources/${1:...}">
+             <value key="js">++resource++${2:some.package}/$2.js</value>
+             <value key="deps">jquery</value>
+           </records>"""
 
   'Resource Registry':
-    'prefix': 'rsreg'
-    'body': """
-              <?xml version="1.0"?>
-              <registry>
+    'prefix':'resource-registry'
+    'body':"""
+           <?xml version="1.0"?>
+           <registry>
 
-                <!-- Add jQuery/JavaScript resources -->
-                <records interface="Products.CMFPlone.interfaces.IResourceRegistry"
-                         prefix="plone.resources/...">
-                  <value key="js">++resource++your.package/custom.js</value>
-                  <value key="deps">jquery</value>
-                </records>
+             <!-- Add jQuery/JavaScript resources -->
+             <records interface="Products.CMFPlone.interfaces.IResourceRegistry"
+                      prefix="plone.resources/${1:...}">
+               <value key="js">++resource++${2:some.package}/${3:custom}.js</value>
+               <value key="deps">jquery</value>
+             </records>
 
-                <!-- Add custom LESS and JavaScript files -->
-                <records interface="Products.CMFPlone.interfaces.IResourceRegistry"
-                         prefix="plone.resources/...">
-                  <value key="js">++resource++your.package/custom.js</value>
-                  <value key="deps">jquery</value>
-                  <value key="css">
-                    <element>++resource++your.package/custom.less</element>
-                  </value>
-                </records>
+             <!-- Add custom LESS and JavaScript files -->
+             <records interface="Products.CMFPlone.interfaces.IResourceRegistry"
+                      prefix="plone.resources/${4:...}">
+               <value key="js">++resource++${5:some.package}/${6:custom}.js</value>
+               <value key="deps">jquery</value>
+               <value key="css">
+                 <element>++resource++${7:some.package}/${8:custom}.less</element>
+               </value>
+             </records>
 
-                <!-- Create bundle to make resources available in Plone -->
-                <records interface='Products.CMFPlone.interfaces.IBundleRegistry' prefix="plone.bundles/...">
-                  <value key="resources">
-                    <element>bundle</element>
-                  </value>
-                  <value key="jscompilation">++resource++your.package/custom-compiled.js</value>
-                  <value key="csscompilation">++resource++your.package/custom-compiled.css</value>
-                  <value key="enabled">True</value>
-                  <!-- Set 'True' for Plone compile resources -->
-                  <value key="compile">True</value>
-                  <value key="depends">plone</value>
-                  <value key="last_compilation"></value>
-                </records>
+             <!-- Create bundle to make resources available in Plone -->
+             <records interface='Products.CMFPlone.interfaces.IBundleRegistry' prefix="plone.bundles/${1:...}">
+               <value key="resources">
+                 <element>${2:...}</element>
+               </value>
+               <value key="jscompilation">++resource++${3:some.package}/${4:custom}-compiled.js</value>
+               <value key="csscompilation">++resource++${5:some.package}/${6:custom}-compiled.css</value>
+               <value key="enabled">True</value>
+               <!-- Set 'True' for Plone compile resources -->
+               <value key="compile">True</value>
+               <value key="depends">plone</value>
+               <value key="last_compilation"></value>
+             </records>
 
-              </registry>
-            """
+           </registry>"""
 
   'Schema XML Template':
-    'prefix': 'portal-schema-template'
-    'body': """
-              <?xml version="1.0"?>
-              <object name="Name" meta_type="Dexterity FTI" i18n:domain="${1:your.package}"
-                  xmlns:i18n="http://xml.zope.org/namespaces/i18n">
-                <property name="title" i18n:translate="">Name</property>
-                <property name="description"
-                  i18n:translate=""></property>
-                <property name="icon_expr"></property>
-                <property name="factory">Name</property>
-                <property name="add_view_expr">string:${folder_url}/++add++Name</property>
-                <property name="link_target"></property>
-                <property name="immediate_view">view</property>
-                <property name="global_allow">True</property>
-                <property name="filter_content_types">True</property>
-                <property name="allowed_content_types">
-                </property>
-                <property name="allow_discussion">False</property>
-                <property name="default_view">view</property>
-                <property name="view_methods">
-                  <element value="view"/>
-                </property>
-                <property name="default_view_fallback">False</property>
-                <property name="add_permission">cmf.AddPortalContent</property>
-                <property name="klass">plone.dexterity.content.Item</property>
-                <property name="behaviors">
-                  <element value="plone.app.content.interfaces.INameFromTitle"/>
-                </property>
-                <property name="schema">your.package.interfaces.IName</property>
-                <property name="model_source"></property>
-                <property name="model_file"post_install_script></property>
-                <alias from="(Default)" to="(dynamic view)"/>
-                <alias from="edit" to="@@edit"/>
-                <alias from="sharing" to="@@sharing"/>
-                <alias from="view" to="(selected layout)"/>
-                <action title="View" action_id="view" category="object" condition_expr=""
-                  description="" icon_expr="" link_target="" url_expr="string:${object_url}"
-                  visible="True">
-                  <permission value="View"/>
-                </action>
-                <action title="Edit" action_id="edit" category="object" condition_expr=""
-                  description="" icon_expr="" link_target=""
-                  url_expr="string:${object_url}/edit" visible="True">
-                  <permission value="Modify portal content"/>
-                </action>
-              </object>
-            """
+    'prefix':'portal-schema-template'
+    'body':"""
+           <?xml version="1.0"?>
+           <object name="${1:Name}" meta_type="Dexterity FTI" i18n:domain="${2:some.package}"
+               xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+             <property name="title" i18n:translate="">${3:Name}</property>
+             <property name="description"
+               i18n:translate=""></property>
+             <property name="icon_expr"></property>
+             <property name="factory">Name</property>
+             <property name="add_view_expr">string:${folder_url}/++add++${4:Name}</property>
+             <property name="link_target"></property>
+             <property name="immediate_view">view</property>
+             <property name="global_allow">True</property>
+             <property name="filter_content_types">True</property>
+             <property name="allowed_content_types">$5</property>
+             <property name="allow_discussion">False</property>
+             <property name="default_view">${6:view}</property>
+             <property name="view_methods">
+               <element value="${7:view}"/>
+             </property>
+             <property name="default_view_fallback">False</property>
+             <property name="add_permission">cmf.AddPortalContent</property>
+             <property name="klass">plone.dexterity.content.Item</property>
+             <property name="behaviors">
+               <element value="plone.app.content.interfaces.INameFromTitle"/>
+             </property>
+             <property name="schema">${8:some.package}.interfaces.IName</property>
+             <property name="model_source"></property>
+             <property name="model_file"post_install_script></property>
+             <alias from="(Default)" to="(dynamic view)"/>
+             <alias from="edit" to="@@edit"/>
+             <alias from="sharing" to="@@sharing"/>
+             <alias from="view" to="(selected layout)"/>
+             <action title="View" action_id="view" category="object" condition_expr=""
+               description="" icon_expr="" link_target="" url_expr="string:${object_url}"
+               visible="True">
+               <permission value="View"/>
+             </action>
+             <action title="Edit" action_id="edit" category="object" condition_expr=""
+               description="" icon_expr="" link_target=""
+               url_expr="string:${object_url}/edit" visible="True">
+               <permission value="Modify portal content"/>
+             </action>
+           </object>"""

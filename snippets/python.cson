@@ -1,65 +1,92 @@
 '.source.python':
 
   'Coding Magic':
-    'prefix': 'coding-magic'
-    'body': """
-            # -*- coding: utf-8 -*-
-            """
+    'prefix':'coding-magic'
+    'body':"""
+           # -*- coding: utf-8 -*-"""
 
   'Schema Python Template':
-    'prefix': 'schema-py'
-    'body': """
-            # -*- coding: utf-8 -*-
+    'prefix':'schema-py'
+    'body':"""
+           # -*- coding: utf-8 -*-
 
-            from your.package import _
-            from zope import schema
-            from zope.interface import Interface
-            from zope.publisher.interfaces.browser import IDefaultBrowserLayer
+           from ${1:some.package} import _
+           from zope import schema
+           from zope.interface import Interface
+           from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 
-            class I${1:Name}(Interface):
+           class I${2:...}(Interface):
 
-                title = schema.TextLine(
-                    title=_(u"Title"),
-                    required=True,
-                )
+               title = schema.TextLine(
+                   title=_(u'$3_title_title',
+                           default=u'Title'),
+                   required=True,
+               )
 
-                description = schema.Text(
-                    title=_(u"Description"),
-                    required=False,
-                )
-            """
+               description = schema.Text(
+                   title=_(u'$4_description_title',
+                           default=u'Description'),
+                   required=False,
+               )"""
 
   'Schema Interfaces':
-    'prefix': 'schema-interfaces'
-    'body': """
-            # -*- coding: utf-8 -*-
+    'prefix':'schema-interfaces'
+    'body':"""
+           # -*- coding: utf-8 -*-
 
-            from your.package import _
-            from zope import schema
-            from zope.interface import Interface
-            from zope.publisher.interfaces.browser import IDefaultBrowserLayer
+           from ${1:some.package} import _
+           from zope import schema
+           from zope.interface import Interface
+           from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 
-            class I${1:YourPackage}Layer(IDefaultBrowserLayer):
-            """
+           class I${2:SomePackage}Layer(IDefaultBrowserLayer):"""
 
   'Browser View':
-    'prefix': 'browser-view'
-    'body': """
-            # -*- coding: utf-8 -*-
+    'prefix':'browser-view'
+    'body':"""
+           # -*- coding: utf-8 -*-
 
-            from Products.Five import BrowserView
-            from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+           from Products.Five import BrowserView
+           from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 
-            class ${1:...}View(BrowserView):
+           class ${1:...}View(BrowserView):
 
-                template = ViewPageTemplateFile('/.../.pt')
+               template = ViewPageTemplateFile('/${2:...}/$3.pt')
 
-                def __call__(self):
-                    return self.template()
+               def __call__(self):
+                   return self.template()
 
-                def ...(self):
-                    return "Hello World!"
-            """
+               def ${4:...}(self):
+                   return "Hello World!"""
+
+  'Return Brains':
+    'prefix':'return-brains'
+    'body':"""
+           def return_$1(self):
+               \"\"\"
+               Return ${2:...} items with dict
+               NOTE: Requires: from plone import api
+               \"\"\"
+               items = []
+               ${3:...} = api.content.find(portal_type='${4:...}')
+               for item in ${5:...}:
+                   item_dict = {
+                       'title': item.title,
+                       'description': item.description,
+                       '${6:...}': $7,
+                   }
+                   items.append(item_dict)
+               return items"""
+
+  'Choice Vocabulary':
+    'prefix':'simple-vocabulary'
+    'body':"""
+           # NOTE: Requires: from some.package import MessageFactory as _
+           #                 from zope.schema.vocabulary import SimpleTerm
+           #                 from zope.schema.vocabulary import SimpleVocabulary
+           ${1:SOME_NAME} = SimpleVocabulary(
+               [SimpleTerm(value=u'${2:...}', title=_(u'$3_vocab_$4', default=u'${5:...}')), ]
+           )"""

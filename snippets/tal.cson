@@ -1,87 +1,97 @@
 '.text.html, .text.xml':
 
   'TAL Template Override':
-    'prefix': 'tal-override'
-    'body': """
-            <html xmlns="http://www.w3.org/1999/xhtml"
-                  xml:lang="en"
-                  xmlns:tal="http://xml.zope.org/namespaces/tal"
-                  xmlns:metal="http://xml.zope.org/namespaces/metal"
-                  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-                  lang="en"
-                  metal:use-macro="context/main_template/macros/master"
-                  i18n:domain="plone">
-            <body>
+    'prefix':'tal-override'
+    'body':"""
+           <html xmlns="http://www.w3.org/1999/xhtml"
+                 xml:lang="en"
+                 xmlns:tal="http://xml.zope.org/namespaces/tal"
+                 xmlns:metal="http://xml.zope.org/namespaces/metal"
+                 xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+                 lang="en"
+                 metal:use-macro="context/main_template/macros/master"
+                 i18n:domain="${1:some.package}">
+           <body>
 
-            <metal:content-core fill-slot="content-core">
-            <metal:content-core define-macro="content-core">
-              $1
-            </metal:content-core>
-            </metal:content-core>
+           <metal:content-core fill-slot="content-core">
+           <metal:content-core define-macro="content-core">
+             $2
+           </metal:content-core>
+           </metal:content-core>
 
-            </body>
-            </html>
-            """
+           </body>
+           </html>"""
 
   'TAL Template Min':
-    'prefix': 'tal-min'
-    'body': """
-            <html xmlns="http://www.w3.org/1999/xhtml"
-                  xml:lang="en"
-                  xmlns:tal="http://xml.zope.org/namespaces/tal"
-                  xmlns:metal="http://xml.zope.org/namespaces/metal"
-                  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-                  lang="en"
-                  metal:use-macro="context/main_template/macros/master"
-                  i18n:domain="plone">
-            <body>
+    'prefix':'tal-min'
+    'body':"""
+           <html xmlns="http://www.w3.org/1999/xhtml"
+                 xml:lang="en"
+                 xmlns:tal="http://xml.zope.org/namespaces/tal"
+                 xmlns:metal="http://xml.zope.org/namespaces/metal"
+                 xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+                 lang="en"
+                 metal:use-macro="context/main_template/macros/master"
+                 i18n:domain="${1:some.package}">
+           <body>
 
-              $1
+             $2
 
-            </body>
-            </html>
-            """
+           </body>
+           </html>"""
 
   'TAL Condition':
-    'prefix': 'tal-condition'
-    'body': 'tal:condition="${1:nothing}"'
+    'prefix':'tal-condition'
+    'body':'tal:condition="${1:nothing}"'
 
   'TAL Content':
-    'prefix': 'tal-content'
-    'body': 'tal:content="$1"'
+    'prefix':'tal-content'
+    'body':'tal:content="$1"'
 
   'TAL Replace':
-    'prefix': 'tal-replace'
-    'body': 'tal:replace="${1:nothing}"'
+    'prefix':'tal-replace'
+    'body':'tal:replace="${1:nothing}"'
 
   'TAL Attributes':
-    'prefix': 'tal-attributes'
-    'body': 'tal:attributes="$1"'
+    'prefix':'tal-attributes'
+    'body':'tal:attributes="$1"'
 
   'TAL Define':
-    'prefix': 'tal-define'
-    'body': 'tal:define="$1"'
+    'prefix':'tal-define'
+    'body':'tal:define="$1"'
 
   'TAL Repeat':
-    'prefix': 'tal-repeat'
-    'body': 'tal:repeat="$1"'
+    'prefix':'tal-repeat'
+    'body':'tal:repeat="$1"'
 
-  'TAL Define Macro':
-    'prefix': 'tal-define-macro'
-    'body': 'define-macro="$1"'
+  'METAL Namespace':
+    'prefix':'metal-namespace'
+    'body':'xmlns:metal="http://xml.zope.org/namespaces/metal"'
 
-  'TAL Use Macro':
-    'prefix': 'tal-use-macro'
-    'body': 'use-macro="$1"'
+  'METAL Use Macro Namespace':
+    'prefix':'metal-use-macro-namespace'
+    'body':'metal:use-macro="context/main_template/macros/master"'
 
-  'TAL Fill Slot':
-    'prefix': 'tal-fill-slot'
-    'body': 'fill-slot="$1"'
+  'METAL Define Macro':
+    'prefix':'metal-define-macro'
+    'body':'define-macro="$1"'
+
+  'METAL Use Macro':
+    'prefix':'metal-use-macro'
+    'body':'use-macro="$1"'
+
+  'METAL Fill Slot':
+    'prefix':'metal-fill-slot'
+    'body':'fill-slot="$1"'
 
   'TAL i18n Translate':
-    'prefix': 'tal-i18n-translate'
-    'body': 'i18n:translate="$1"'
+    'prefix':'tal-i18n-translate'
+    'body':'i18n:translate="$1"'
 
   'TAL i18n Attributes':
-    'prefix': 'tal-i18n-attributes'
-    'body': 'i18n:attributes="$1"'
+    'prefix':'tal-i18n-attributes'
+    'body':'i18n:attributes="$1"'
+
+  'i18n Namespace':
+    'prefix':'i18n-namespace'
+    'body':'xmlns:i18n="http://xml.zope.org/namespaces/i18n"'
