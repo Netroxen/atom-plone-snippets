@@ -110,14 +110,14 @@
 	          doctype = <!DOCTYPE html>
 	          enabled-bundles =
 	          disabled-bundles =
- 
+
 	          development-css = /++theme++${5:some.package}/less/$6.less
 	          production-css = /++theme++${7:some.package}/$8-compiled.css
 	          tinymce-content-css = /++theme++${9:some.package}/$10-compiled.css
- 
+
 	          development-js =
 	          production-js =
- 
+
 	          [theme:overrides]
 	          directory = template-overrides
             """

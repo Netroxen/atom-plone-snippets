@@ -35,9 +35,9 @@
                   metal:use-macro="context/main_template/macros/master"
                   i18n:domain="${1:some.package}">
             <body>
- 
+
               $2
- 
+
             </body>
             </html>
             """
