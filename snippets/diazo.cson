@@ -8,12 +8,12 @@
                      xmlns:css="http://namespaces.plone.org/diazo/css"
                      xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                      xmlns:xi="http://www.w3.org/2001/XInclude">
-  
+
                 <rules css:if-content="$1">
                     <theme href="$2" />
-  
+
                 </rules>
-  
+
               </rules>
             """
 
@@ -99,25 +99,25 @@
             """
 
   'Manifest':
-		'prefix':'daz-manifest'
-		'body': """
-	            [theme]
-	            title = ${1:...} Theme
-	            description = A theme for ${2:...}
-	            preview = preview.png
-	            rules = /++theme++${3:some.package}/rules.xml
-	            prefix = /++theme++${4:some.package}
-	            doctype = <!DOCTYPE html>
-	            enabled-bundles =
-	            disabled-bundles =
+    'prefix':'daz-manifest'
+    'body': """
+              [theme]
+              title = ${1:...} Theme
+              description = A theme for ${2:...}
+              preview = preview.png
+              rules = /++theme++${3:some.package}/rules.xml
+              prefix = /++theme++${4:some.package}
+              doctype = <!DOCTYPE html>
+              enabled-bundles =
+              disabled-bundles =
 
-	            development-css = /++theme++${5:some.package}/less/$6.less
-	            production-css = /++theme++${7:some.package}/$8-compiled.css
-	            tinymce-content-css = /++theme++${9:some.package}/$10-compiled.css
+              development-css = /++theme++${5:some.package}/less/$6.less
+              production-css = /++theme++${7:some.package}/$8-compiled.css
+              tinymce-content-css = /++theme++${9:some.package}/$10-compiled.css
 
-	            development-js =
-	            production-js =
+              development-js =
+              production-js =
 
-	            [theme:overrides]
-	            directory = template-overrides
+              [theme:overrides]
+              directory = template-overrides
             """
