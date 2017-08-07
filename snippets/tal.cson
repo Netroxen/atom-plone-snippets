@@ -2,45 +2,45 @@
 
   'TAL Template Override':
     'prefix':'tal-override'
-    'body':"""
-        <html xmlns="http://www.w3.org/1999/xhtml"
-              xml:lang="en"
-              xmlns:tal="http://xml.zope.org/namespaces/tal"
-              xmlns:metal="http://xml.zope.org/namespaces/metal"
-              xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-              lang="en"
-              metal:use-macro="context/main_template/macros/master"
-              i18n:domain="${1:some.package}">
-        <body>
+    'body': """
+            <html xmlns="http://www.w3.org/1999/xhtml"
+                  xml:lang="en"
+                  xmlns:tal="http://xml.zope.org/namespaces/tal"
+                  xmlns:metal="http://xml.zope.org/namespaces/metal"
+                  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+                  lang="en"
+                  metal:use-macro="context/main_template/macros/master"
+                  i18n:domain="${1:some.package}">
+            <body>
 
-        <metal:content-core fill-slot="content-core">
-        <metal:content-core define-macro="content-core">
-         $2
-        </metal:content-core>
-        </metal:content-core>
+            <metal:content-core fill-slot="content-core">
+            <metal:content-core define-macro="content-core">
+              $2
+            </metal:content-core>
+            </metal:content-core>
 
-        </body>
-        </html>
-        """
+            </body>
+            </html>
+            """
 
   'TAL Template Min':
     'prefix':'tal-min'
-    'body':"""
-        <html xmlns="http://www.w3.org/1999/xhtml"
-              xml:lang="en"
-              xmlns:tal="http://xml.zope.org/namespaces/tal"
-              xmlns:metal="http://xml.zope.org/namespaces/metal"
-              xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-              lang="en"
-              metal:use-macro="context/main_template/macros/master"
-              i18n:domain="${1:some.package}">
-        <body>
-
-         $2
-
-        </body>
-        </html>
-        """
+    'body': """
+            <html xmlns="http://www.w3.org/1999/xhtml"
+                  xml:lang="en"
+                  xmlns:tal="http://xml.zope.org/namespaces/tal"
+                  xmlns:metal="http://xml.zope.org/namespaces/metal"
+                  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+                  lang="en"
+                  metal:use-macro="context/main_template/macros/master"
+                  i18n:domain="${1:some.package}">
+            <body>
+ 
+              $2
+ 
+            </body>
+            </html>
+            """
 
   'TAL Condition':
     'prefix':'tal-condition'
