@@ -1,5 +1,12 @@
-# atom-plone-snippets
+# Atom Plone Snippets
 
-A Plone autocomplete package consisting of various snippets and templates for the Atom editor.
+> This package incorporates various snippets and code autocompletions for Plone.
 
-![A screenshot of your package](https://f.cloud.github.com/assets/69169/2290250/c35d867a-a017-11e3-86be-cd7c5bf3ff9b.gif)
+> These can of-course be used in any Pyramid based framework or environment!
+
+- Browser-View Snippets
+- Diazo Snippets
+- Configure Snippets
+- TAL Templating Snippets
+
+![Atom Plone Snippets](https://www.dropbox.com/s/2bu0k50s8tv7wb4/Autocomplete_Snippet_Plone.gif?raw=1)

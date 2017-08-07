@@ -1,4 +1,10 @@
-'.text.py':
+'.source.python':
+
+  'Coding Magic':
+    'prefix': 'coding-magic'
+    'body': """
+            # -*- coding: utf-8 -*-
+            """
 
   'Schema Python Template':
     'prefix': 'schema-py'
