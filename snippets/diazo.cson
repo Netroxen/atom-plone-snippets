@@ -3,60 +3,60 @@
   'Diazo Template':
     'prefix':'daz-template'
     'body': """
-            <?xml version="1.0" encoding="UTF-8"?>
-            <rules xmlns="http://namespaces.plone.org/diazo"
-                   xmlns:css="http://namespaces.plone.org/diazo/css"
-                   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                   xmlns:xi="http://www.w3.org/2001/XInclude">
-
-              <rules css:if-content="$1">
-                  <theme href="$2" />
-
+              <?xml version="1.0" encoding="UTF-8"?>
+              <rules xmlns="http://namespaces.plone.org/diazo"
+                     xmlns:css="http://namespaces.plone.org/diazo/css"
+                     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                     xmlns:xi="http://www.w3.org/2001/XInclude">
+  
+                <rules css:if-content="$1">
+                    <theme href="$2" />
+  
+                </rules>
+  
               </rules>
-
-            </rules>
             """
 
   'Diazo Before':
     'prefix':'daz-before'
     'body': """
-            <!-- Comment -->
-            <before css:theme="$1"
-                    css:content="$2" />
+              <!-- Comment -->
+              <before css:theme="$1"
+                      css:content="$2" />
             """
 
   'Diazo After':
     'prefix':'daz-after'
     'body': """
-            <!-- Comment -->
-            <after css:theme="$1"
-                   css:content="$2" />
+              <!-- Comment -->
+              <after css:theme="$1"
+                     css:content="$2" />
             """
 
   'Diazo Replace':
     'prefix':'daz-replace'
     'body': """
-            <!-- Comment -->
-            <replace css:theme-children="$1"
-                     css:content-children="$2" />
+              <!-- Comment -->
+              <replace css:theme-children="$1"
+                       css:content-children="$2" />
             """
 
   'Diazo Copy':
     'prefix':'daz-copy'
     'body': """
-            <!-- Comment -->
-            <copy css:content="$1"
-                  css:theme="$2"
-                  attributes="$3" />
+              <!-- Comment -->
+              <copy css:content="$1"
+                    css:theme="$2"
+                    attributes="$3" />
             """
 
   'Diazo Merge':
     'prefix':'daz-merge'
     'body': """
-            <!-- Comment -->
-            <merge css:content="$1"
-                   css:theme="$2"
-                   attributes="$3" />
+              <!-- Comment -->
+              <merge css:content="$1"
+                     css:theme="$2"
+                     attributes="$3" />
             """
 
   'Diazo Drop':
@@ -82,42 +82,42 @@
   'Diazo Ruleset':
     'prefix':'daz-rule'
     'body': """
-            <!-- Comment -->
-            <rules css:if-content="$1">
-              $2
-            </rules>
+              <!-- Comment -->
+              <rules css:if-content="$1">
+                $2
+              </rules>
             """
 
   'Diazo XSL Attribute':
     'prefix':'daz-xsl-attribute'
     'body': """
-            <!-- This example replaces the img in #content with the src extension /@@/images/image/thumb  -->
-            <replace css:theme="#target" css:content="#content" />
-            <xsl:template match="img/@src[not(contains(., '@@'))]">
-                <xsl:attribute name="src"><xsl:value-of select="." />/@@/images/image/thumb</xsl:attribute>
-            </xsl:template>
+              <!-- This example replaces the img in #content with the src extension /@@/images/image/thumb  -->
+              <replace css:theme="#target" css:content="#content" />
+              <xsl:template match="img/@src[not(contains(., '@@'))]">
+                  <xsl:attribute name="src"><xsl:value-of select="." />/@@/images/image/thumb</xsl:attribute>
+              </xsl:template>
             """
 
   'Manifest':
 		'prefix':'daz-manifest'
 		'body': """
-	          [theme]
-	          title = ${1:...} Theme
-	          description = A theme for ${2:...}
-	          preview = preview.png
-	          rules = /++theme++${3:some.package}/rules.xml
-	          prefix = /++theme++${4:some.package}
-	          doctype = <!DOCTYPE html>
-	          enabled-bundles =
-	          disabled-bundles =
+	            [theme]
+	            title = ${1:...} Theme
+	            description = A theme for ${2:...}
+	            preview = preview.png
+	            rules = /++theme++${3:some.package}/rules.xml
+	            prefix = /++theme++${4:some.package}
+	            doctype = <!DOCTYPE html>
+	            enabled-bundles =
+	            disabled-bundles =
 
-	          development-css = /++theme++${5:some.package}/less/$6.less
-	          production-css = /++theme++${7:some.package}/$8-compiled.css
-	          tinymce-content-css = /++theme++${9:some.package}/$10-compiled.css
+	            development-css = /++theme++${5:some.package}/less/$6.less
+	            production-css = /++theme++${7:some.package}/$8-compiled.css
+	            tinymce-content-css = /++theme++${9:some.package}/$10-compiled.css
 
-	          development-js =
-	          production-js =
+	            development-js =
+	            production-js =
 
-	          [theme:overrides]
-	          directory = template-overrides
+	            [theme:overrides]
+	            directory = template-overrides
             """
