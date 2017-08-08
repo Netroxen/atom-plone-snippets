@@ -15,8 +15,8 @@
     'body': """
             [buildout]
             eggs-directory = /home/$1/.buildout/eggs
-            download-cache = /home/$2/.buildout/downloads
-            extends-cache  = /home/$3/.buildout/extends
+            download-cache = /home/$1/.buildout/downloads
+            extends-cache  = /home/$1/.buildout/extends
             """
 
   'i18n Buildout':
@@ -110,20 +110,20 @@
                  tal:omit-tag=""
                  tal:define="portal context/@@plone_portal_state/portal;
                              charset portal/email_charset|string:utf-8;
-                             dummy python:request.RESPONSE.setHeader('Content-Type', 'text/plain;;charset=%s' % charset)
-                             ">
-            <span i18n:translate="" tal:omit-tag="">Hello</span> <span tal:replace="options/name|nothing"/>,
+                             dummy python:request.RESPONSE.setHeader('Content-Type', 'text/plain;;charset=%s' % charset)">
 
-            <span i18n:translate="" tal:omit-tag="">Thank you for your message</span>.
+              <span i18n:translate="" tal:omit-tag="">Hello</span> <span tal:replace="options/name|nothing"/>,
+              <span i18n:translate="" tal:omit-tag="">Thank you for your message</span>.
 
-            [<span i18n:translate="" tal:omit-tag="">Sent as</span>]
-            <span i18n:translate="" tal:omit-tag="">Name</span>: <span tal:replace="options/name|nothing"/>
-            <span i18n:translate="" tal:omit-tag="">Contact</span>: <span tal:replace="options/phone|nothing"/>
-            <span i18n:translate="" tal:omit-tag="">E-Mail</span>: <span tal:replace="options/email|nothing"/>
-            <span i18n:translate="" tal:omit-tag="">Address</span>: <span tal:replace="options/address|nothing"/>
+              [<span i18n:translate="" tal:omit-tag="">Sent as</span>]
+              <span i18n:translate="" tal:omit-tag="">Name</span>: <span tal:replace="options/name|nothing"/>
+              <span i18n:translate="" tal:omit-tag="">Contact</span>: <span tal:replace="options/phone|nothing"/>
+              <span i18n:translate="" tal:omit-tag="">E-Mail</span>: <span tal:replace="options/email|nothing"/>
+              <span i18n:translate="" tal:omit-tag="">Address</span>: <span tal:replace="options/address|nothing"/>
 
-            [<span i18n:translate="" tal:omit-tag="">Message</span>]
-            <span tal:replace="options/message|nothing"/>
+              [<span i18n:translate="" tal:omit-tag="">Message</span>]
+              <span tal:replace="options/message|nothing"/>
+
             </div>
             """
 
@@ -208,7 +208,7 @@
     'body': """
             <!-- Comment -->
             <value key="css">
-               <element>++resource++${1:some.package}/${1:custom}.less</element>
+               <element>++resource++${1:some.package}/${2:custom}.less</element>
             </value>
             """
 
@@ -218,7 +218,7 @@
             <!-- Comment -->
             <records interface="Products.CMFPlone.interfaces.IResourceRegistry"
                    prefix="plone.resources/${1:...}">
-              <value key="js">++resource++${2:some.package}/$2.js</value>
+              <value key="js">++resource++${2:some.package}/$3.js</value>
               <value key="deps">jquery</value>
             </records>
             """
@@ -231,14 +231,14 @@
 
               <!-- Add jQuery/JavaScript resources -->
               <records interface="Products.CMFPlone.interfaces.IResourceRegistry"
-                       prefix="plone.resources/${1:...}">
+                       prefix="plone.resources/$1">
                 <value key="js">++resource++${2:some.package}/${3:custom}.js</value>
                 <value key="deps">jquery</value>
               </records>
 
               <!-- Add custom LESS and JavaScript files -->
               <records interface="Products.CMFPlone.interfaces.IResourceRegistry"
-                       prefix="plone.resources/${4:...}">
+                       prefix="plone.resources/$4">
                 <value key="js">++resource++${2:some.package}/${5:custom}.js</value>
                 <value key="deps">jquery</value>
                 <value key="css">
@@ -247,10 +247,10 @@
               </records>
 
               <!-- Create bundle to make resources available in Plone -->
-              <records interface='Products.CMFPlone.interfaces.IBundleRegistry' prefix="plone.bundles/${6:...}">
+              <records interface='Products.CMFPlone.interfaces.IBundleRegistry' prefix="plone.bundles/$6">
                 <value key="resources">
-                  <element>${1:...}</element>
-                  <element>${4:...}</element>
+                  <element>$1</element>
+                  <element>$4</element>
                 </value>
                 <value key="jscompilation">++resource++${2:some.package}/${5:custom}-compiled.js</value>
                 <value key="csscompilation">++resource++${2:some.package}/${5:custom}-compiled.css</value>
@@ -270,21 +270,21 @@
             <?xml version="1.0"?>
             <object name="${1:Name}" meta_type="Dexterity FTI" i18n:domain="${2:some.package}"
                 xmlns:i18n="http://xml.zope.org/namespaces/i18n">
-              <property name="title" i18n:translate="">${3:Name}</property>
+              <property name="title" i18n:translate="">${1:Name}</property>
               <property name="description"
                 i18n:translate=""></property>
               <property name="icon_expr"></property>
-              <property name="factory">Name</property>
-              <property name="add_view_expr">string:${folder_url}/++add++${4:Name}</property>
+              <property name="factory">${1:Name}</property>
+              <property name="add_view_expr">string:${folder_url}/++add++${1:Name}</property>
               <property name="link_target"></property>
               <property name="immediate_view">view</property>
               <property name="global_allow">True</property>
               <property name="filter_content_types">True</property>
-              <property name="allowed_content_types">$5</property>
+              <property name="allowed_content_types"></property>
               <property name="allow_discussion">False</property>
-              <property name="default_view">${6:view}</property>
+              <property name="default_view">${3:view}</property>
               <property name="view_methods">
-                <element value="${7:view}"/>
+                <element value="${3:view}"/>
               </property>
               <property name="default_view_fallback">False</property>
               <property name="add_permission">cmf.AddPortalContent</property>
@@ -292,7 +292,7 @@
               <property name="behaviors">
                 <element value="plone.app.content.interfaces.INameFromTitle"/>
               </property>
-              <property name="schema">${8:some.package}.interfaces.IName</property>
+              <property name="schema">${2:some.package}.interfaces.IName</property>
               <property name="model_source"></property>
               <property name="model_file"post_install_script></property>
               <alias from="(Default)" to="(dynamic view)"/>
