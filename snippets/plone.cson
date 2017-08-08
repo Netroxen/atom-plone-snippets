@@ -239,20 +239,21 @@
               <!-- Add custom LESS and JavaScript files -->
               <records interface="Products.CMFPlone.interfaces.IResourceRegistry"
                        prefix="plone.resources/${4:...}">
-                <value key="js">++resource++${5:some.package}/${6:custom}.js</value>
+                <value key="js">++resource++${2:some.package}/${5:custom}.js</value>
                 <value key="deps">jquery</value>
                 <value key="css">
-                  <element>++resource++${7:some.package}/${8:custom}.less</element>
+                  <element>++resource++${2:some.package}/${5:custom}.less</element>
                 </value>
               </records>
 
               <!-- Create bundle to make resources available in Plone -->
-              <records interface='Products.CMFPlone.interfaces.IBundleRegistry' prefix="plone.bundles/${1:...}">
+              <records interface='Products.CMFPlone.interfaces.IBundleRegistry' prefix="plone.bundles/${6:...}">
                 <value key="resources">
-                  <element>${2:...}</element>
+                  <element>${1:...}</element>
+                  <element>${4:...}</element>
                 </value>
-                <value key="jscompilation">++resource++${3:some.package}/${4:custom}-compiled.js</value>
-                <value key="csscompilation">++resource++${5:some.package}/${6:custom}-compiled.css</value>
+                <value key="jscompilation">++resource++${2:some.package}/${5:custom}-compiled.js</value>
+                <value key="csscompilation">++resource++${2:some.package}/${5:custom}-compiled.css</value>
                 <value key="enabled">True</value>
                 <!-- Set 'True' for Plone compile resources -->
                 <value key="compile">True</value>
