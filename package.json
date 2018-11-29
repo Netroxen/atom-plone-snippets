@@ -1,7 +1,7 @@
 {
   "name": "atom-plone-snippets",
   "main": "./lib/atom-plone-snippets",
-  "version": "0.6.11",
+  "version": "0.7.0",
   "description": "Plone snippets with autocompletion.",
   "keywords": [],
   "activationCommands": {
