@@ -10,7 +10,9 @@
                      xmlns:xi="http://www.w3.org/2001/XInclude">
 
                 <rules css:if-content="$1">
-                    <theme href="$2" />
+
+                  <!-- Conditionally use a theme -->
+                  <theme href="$2" />
 
                 </rules>
 
@@ -20,7 +22,7 @@
   'Diazo Before':
     'prefix':'daz-before'
     'body': """
-              <!-- Comment -->
+              <!-- Inserts before another element in the theme -->
               <before css:theme="$1"
                       css:content="$2" />
             """
@@ -28,7 +30,7 @@
   'Diazo After':
     'prefix':'daz-after'
     'body': """
-              <!-- Comment -->
+              <!-- Inserts after another element in the theme -->
               <after css:theme="$1"
                      css:content="$2" />
             """
@@ -36,7 +38,7 @@
   'Diazo Replace':
     'prefix':'daz-replace'
     'body': """
-              <!-- Comment -->
+              <!-- Replaces child nodes of an element in the theme -->
               <replace css:theme-children="$1"
                        css:content-children="$2" />
             """
@@ -44,19 +46,19 @@
   'Diazo Copy':
     'prefix':'daz-copy'
     'body': """
-              <!-- Comment -->
-              <copy css:content="$1"
-                    css:theme="$2"
-                    attributes="$3" />
+              <!-- Copies an attribute to an element in the theme -->
+              <copy css:content="${1:body}"
+                    css:theme="${2:body}"
+                    attributes="${3:class}" />
             """
 
   'Diazo Merge':
     'prefix':'daz-merge'
     'body': """
-              <!-- Comment -->
-              <merge css:content="$1"
-                     css:theme="$2"
-                     attributes="$3" />
+              <!-- Merges an attribute with an element in the theme -->
+              <merge css:content="${1:body}"
+                     css:theme="${2:body}"
+                     attributes="${3:class}" />
             """
 
   'Diazo Drop':
@@ -69,32 +71,63 @@
 
   'Diazo Theme':
     'prefix':'daz-theme'
-    'body':'<theme href="${1:theme}.html" />'
+    'body':'<theme href="${1:template}.html" />'
 
-  'Diazo NoTheme':
-    'prefix':'daz-notheme'
+  'Diazo No-Theme':
+    'prefix':'daz-no-theme'
     'body':'<notheme css:if-content="$1" />'
 
   'Diazo XInclude':
     'prefix':'daz-xinclude'
-    'body':'<xi:include href="${1:standard-rules}.xml" />'
+    'body':'<xi:include href="${1:rules}.xml" />'
 
-  'Diazo Ruleset':
-    'prefix':'daz-rule'
+  'Diazo Rules':
+    'prefix':'daz-rules'
     'body': """
-              <!-- Comment -->
+              <!-- Conditionally applies a set of rules -->
               <rules css:if-content="$1">
                 $2
               </rules>
             """
 
+  'Diazo Nested-If':
+    'prefix':'daz-nested-if'
+    'body': """
+              <!-- Nested if conditions -->
+              <rules if="${1:condition_1}">
+                <rules if="${2:condition_2}">
+                  <copy if="${3:condition_3}"
+                        css:theme="$4"
+                        css:content="$5" />
+                </rules>
+              </rules>
+            """
+
+  'Diazo If Condition':
+    'prefix':'daz-if'
+    'body': """
+              <copy if="(${1:condition_1}) and (${2:condition_2}) and (${3:condition_3})" css:theme="$4" css:content="$5" />
+            """
+
+  'Diazo Inject HTML':
+    'prefix':'daz-inject-html'
+    'body': """
+              <after theme-children="${1:/html/head}">
+                ${2:<style type="text/css">
+                  $3
+                </style>}
+              </after>
+            """
+
   'Diazo XSL Attribute':
     'prefix':'daz-xsl-attribute'
     'body': """
-              <!-- This example replaces the img in #content with the src extension /@@/images/image/thumb  -->
-              <replace css:theme="#target" css:content="#content" />
-              <xsl:template match="img/@src[not(contains(., '@@'))]">
-                  <xsl:attribute name="src"><xsl:value-of select="." />/@@/images/image/thumb</xsl:attribute>
+              ${1:<!-- Example: Matches content node with src value /@@/images/image/thumb -->}
+              <replace css:theme="$2" css:content="$3" />
+              <xsl:template match="${4:img/@src[not(contains(., '@@'))]}">
+                <xsl:attribute name="${5:src}">
+                  <xsl:value-of select="${6:.}" />${7:/@@/images/image/thumb}
+                </xsl:attribute>
               </xsl:template>
             """
 
@@ -103,21 +136,22 @@
     'body': """
               [theme]
               title = ${1:...} Theme
-              description = A theme for ${2:...}
-              preview = preview.png
+              description = A theme for the ${1:...} project.
+              preview = ${2:preview}.png
               rules = /++theme++${3:some.package}/rules.xml
-              prefix = /++theme++${4:some.package}
+              prefix = /++theme++${3:some.package}
               doctype = <!DOCTYPE html>
-              enabled-bundles =
-              disabled-bundles =
+              enabled-bundles = ${4:some.bundle}
+              disabled-bundles = ${5:plone}
 
-              development-css = /++theme++${5:some.package}/less/$6.less
-              production-css = /++theme++${7:some.package}/$8-compiled.css
-              tinymce-content-css = /++theme++${9:some.package}/$10-compiled.css
+              development-css = /++theme++${3:some.package}/less/$6.less
+              production-css = /++theme++${3:some.package}/$6-compiled.css
 
-              development-js =
-              production-js =
+              tinymce-content-css = /++theme++${3:some.package}/${7:tinymce}.css
+
+              development-js = /++theme++${3:some.package}/js/$6.js
+              production-js = /++theme++${3:some.package}/$6-compiled.js
 
               [theme:overrides]
-              directory = template-overrides
+              directory = ${10:template-overrides}
             """
